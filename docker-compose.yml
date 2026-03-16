@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  whisper:
+    build: .
+    image: whisper-streaming
+    container_name: whisper
+    volumes:
+      - ./audio:/app/audio
+      - ./models:/root/.cache/whisper
+    ports:
+      - "43001:43001"
+    command: python whisper_online_server.py --model base --language fr --vac --host 0.0.0.0 --port 43001
